@@ -39,12 +39,39 @@ praise("${EXCLAMATION}!!! This code works ${adverb_manner} well")
 
 ## Cowsay to have characters say something
 ```{r}
-say("Hello World!", by = "rms")
+say("Hello World!", by = "yoda")
 ```
 
 ## run usethis::edit_r_profile() in the console to make changes to RStudio profile
 
+## Create connection to github if you started r.proj as non-version controlled
+### Run these sequentially in the console
+- usethis::use_git()
+- usethis::use_github()
+### To rename branch using the code from GitHub, run that in the terminal
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
 
+## Paletteer --> aggregated color palettes
+
+- to view all of the color palettes available in paletteer, run view(palettes_d_names) in the console. The length of the palette must be at least as long as the length of the data you are displaying
+```{r}
+## to view all of the palettes available 
+storms %>% 
+  group_by(name) %>% 
+  summarize(min_pressure = min(pressure, na.rm = TRUE)) %>% 
+  slice_min(n = 6, min_pressure) %>% 
+  ggplot(aes(x = min_pressure, y = name)) +
+  geom_col(aes(fill = name)) +
+  scale_fill_paletteer_d("nbapalettes::lakers_alt")
+```
+
+## Map of Jornada LTER Vegetation
+```{r}
+
+```
 
 
 
